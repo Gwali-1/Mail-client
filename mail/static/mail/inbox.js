@@ -37,13 +37,14 @@ function compose_email() {
 
 
 //load email info 
-function loadEmailInfo(info){
+function loadEmailInfo(info,currentMailbox){
     // Show the email and hide other views
     document.querySelector('#emails-view').style.display = 'none';
     document.querySelector('#compose-view').style.display = 'none';
     document.querySelector('#email-info').style.display = 'block';
-
-    const email =  `  
+    console.log(this)
+    
+    const templateWithButton =  `  
     <div class= 'row justify-content-between' >
 
       <div class= 'col-7 ' >
@@ -52,23 +53,42 @@ function loadEmailInfo(info){
         <p>Subject:${info.subject}</p>
         <p>Timestamp:${info.timestamp}</p>
       </div>
-
       <div class = col-3>
-      <button class = 'btn btn-light archive ' ><i class='bi bi-archive-fill ${info.archived? 'text-success' : 'text-dark'}'>archive</i></button>
+      <button class = 'btn btn-light archive ' ><i class='bi bi-archive-fill ${info.archived? 'text-success' : 'text-dark'}'>
+      ${info.archived? 'Unarchive' : 'Archive'}</i></button>
       </div> 
     </div>
     <hr>
     <p>${info.body}</p>
     `
 
-    document.querySelector("#email-info").innerHTML = email
-    document.querySelector(".archive").addEventListener("click",function(){
-      console.log("archived");
-      if(this.style.color === "black"){
-        console.log(yes)
-      }
 
-    })
+    const templateWithoutButton =  `  <div >
+      <div class= '' >
+          <p>From:${info.sender}</p>
+          <p>To:${info.recipients.join(",")}<p>
+          <p>Subject:${info.subject}</p>
+          <p>Timestamp:${info.timestamp}</p>
+      </div>
+      <hr>
+      <p>${info.body}</p>
+    </div>
+    `
+
+    const email = currentMailbox === 'sent' ? templateWithoutButton : templateWithButton;
+
+    document.querySelector("#email-info").innerHTML = email
+    document.querySelector(".archive")?.addEventListener("click",function(){
+      console.log("archived");
+      fetch(`/emails/${info.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            archived: !info.archived
+        })
+      }).then(()=>{
+        load_mailbox("inbox");
+      });
+    });
 };
 
 
@@ -94,7 +114,7 @@ function load_mailbox(mailbox) {
 
      
       const emailElement =  ` 
-      <div class=" email-ele mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'}  row border border-secondary" id=email data-id = ${obj.id} >
+      <div class=" email-ele mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'}  row border border-secondary" id=email data-id = ${obj.id} data-mailbox = ${mailbox} >
           <div class="col fw-bold  ">${obj.sender}</div>
           <div class="col-sm-5   ">${obj.subject}</div>
           <div class="col fw-lighter fs-6 ">${obj.timestamp}</div>
@@ -157,6 +177,7 @@ return false;
 
 //viewEmail
 function viewEmail(){
+    const currentMailbox = this.dataset.mailbox
     fetch(`/emails/${this.dataset.id}`, {
       method: 'PUT',
       body: JSON.stringify({
@@ -168,7 +189,7 @@ function viewEmail(){
     .then(response => response.json())
     .then(emailInfo => {
       console.log(emailInfo);
-      loadEmailInfo(emailInfo)
+      loadEmailInfo(emailInfo,currentMailbox);
     });
 };
 
