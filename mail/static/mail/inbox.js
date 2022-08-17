@@ -44,16 +44,31 @@ function loadEmailInfo(info){
     document.querySelector('#email-info').style.display = 'block';
 
     const email =  `  
-    <div>
+    <div class= 'row justify-content-between' >
+
+      <div class= 'col-7 ' >
         <p>From:${info.sender}</p>
         <p>To:${info.recipients.join(",")}<p>
         <p>Subject:${info.subject}</p>
         <p>Timestamp:${info.timestamp}</p>
-        <hr>
-        <p>${info.body}</p>
-    </div>`
+      </div>
+
+      <div class = col-3>
+      <button class = 'btn btn-light archive ' ><i class='bi bi-archive-fill ${info.archived? 'text-success' : 'text-dark'}'>archive</i></button>
+      </div> 
+    </div>
+    <hr>
+    <p>${info.body}</p>
+    `
 
     document.querySelector("#email-info").innerHTML = email
+    document.querySelector(".archive").addEventListener("click",function(){
+      console.log("archived");
+      if(this.style.color === "black"){
+        console.log(yes)
+      }
+
+    })
 };
 
 
@@ -82,7 +97,7 @@ function load_mailbox(mailbox) {
       <div class=" email-ele mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'}  row border border-secondary" id=email data-id = ${obj.id} >
           <div class="col fw-bold  ">${obj.sender}</div>
           <div class="col-sm-5   ">${obj.subject}</div>
-          <div class="col fw-lighter  ">${obj.timestamp}</div>
+          <div class="col fw-lighter fs-6 ">${obj.timestamp}</div>
       </div>
   `
       document.querySelector('#emails-view').insertAdjacentHTML("beforeend",emailElement)
