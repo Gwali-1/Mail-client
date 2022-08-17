@@ -8,9 +8,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
   //api request functionality
   document.querySelector("#compose-form").onsubmit = sendEmail;
 
+  
   // By default, load the inbox
   load_mailbox('inbox');
 });
@@ -22,6 +25,8 @@ function compose_email() {
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'block';
+  document.querySelector('#email-info').style.display = 'none';
+
 
   // Clear out composition fields
   document.querySelector('#compose-recipients').value = '';
@@ -31,36 +36,67 @@ function compose_email() {
 
 
 
+//load email info 
+function loadEmailInfo(info){
+    // Show the email and hide other views
+    document.querySelector('#emails-view').style.display = 'none';
+    document.querySelector('#compose-view').style.display = 'none';
+    document.querySelector('#email-info').style.display = 'block';
+
+    const email =  `  
+    <div>
+        <p>From:${info.sender}</p>
+        <p>To:${info.recipients.join(",")}<p>
+        <p>Subject:${info.subject}</p>
+        <p>Timestamp:${info.timestamp}</p>
+        <hr>
+        <p>${info.body}</p>
+    </div>`
+
+    document.querySelector("#email-info").innerHTML = email
+};
+
 
 
 //load email
+
 function load_mailbox(mailbox) {
 
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
+  document.querySelector('#email-info').style.display = 'none';
+
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
   //api call
-
   fetch(`/emails/${mailbox}`).then(response => response.json()).then(emails => {
+    //add elements to page
     for(const obj of emails){
       console.log(obj);
 
      
       const emailElement =  ` 
-      <div class=" mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'} data-emailId=${obj.id} id=email row border border-secondary">
-          <div class="col fw-bold ">${obj.sender}</div>
-          <div class="col-sm-5 ">${obj.subject}</div>
-          <div class="col fw-lighter ">${obj.timestamp}</div>
+      <div class=" email-ele mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'}  row border border-secondary" id=email data-id = ${obj.id} >
+          <div class="col fw-bold  ">${obj.sender}</div>
+          <div class="col-sm-5   ">${obj.subject}</div>
+          <div class="col fw-lighter  ">${obj.timestamp}</div>
       </div>
   `
       document.querySelector('#emails-view').insertAdjacentHTML("beforeend",emailElement)
     };
-  })
-}
+
+    //add Event Listner
+    document.querySelectorAll("#email").forEach(element =>{
+      element.addEventListener("click",viewEmail)
+    })
+  }).catch(error => console.log(error));
+};
+
+
+
 
 
 
@@ -90,9 +126,29 @@ function sendEmail() {
     }})
     .catch(error => console.log(error));
   
-  return false
+return false;
 };
 
+
+
+
+
+
+
+
+
+
+
+
+//viewEmail
+function viewEmail(){
+    fetch(`/emails/${this.dataset.id}`)
+    .then(response => response.json())
+    .then(emailInfo => {
+      console.log(emailInfo);
+      loadEmailInfo(emailInfo)
+    });
+};
 
 
 
