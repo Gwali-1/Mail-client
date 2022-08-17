@@ -51,10 +51,10 @@ function load_mailbox(mailbox) {
 
      
       const emailElement =  ` 
-      <div class=" mb-2 ${obj.read ? 'bg-secondary' : 'bg-light'} data-emailId=${obj.id} id=email row g-2 border border-primary">
-          <div class="col ">${obj.sender}</div>
+      <div class=" mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'} data-emailId=${obj.id} id=email row border border-secondary">
+          <div class="col fw-bold ">${obj.sender}</div>
           <div class="col-sm-5 ">${obj.subject}</div>
-          <div class="col   ">${obj.timestamp}</div>
+          <div class="col fw-lighter ">${obj.timestamp}</div>
       </div>
   `
       document.querySelector('#emails-view').insertAdjacentHTML("beforeend",emailElement)
