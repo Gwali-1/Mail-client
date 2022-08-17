@@ -142,6 +142,13 @@ return false;
 
 //viewEmail
 function viewEmail(){
+    fetch(`/emails/${this.dataset.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+          read: true
+      })
+    });
+
     fetch(`/emails/${this.dataset.id}`)
     .then(response => response.json())
     .then(emailInfo => {
