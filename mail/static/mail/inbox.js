@@ -157,12 +157,13 @@ function load_mailbox(mailbox) {
           <div class="col fw-lighter fst-italic ">${obj.timestamp}</div>
       </div>
   `
-      document.querySelector('#emails-view').insertAdjacentHTML("beforeend",emailElement)
+      document.querySelector('#emails-view').insertAdjacentHTML("beforeend",emailElement);
+ 
     };
 
     //add Event Listner
     document.querySelectorAll("#email").forEach(element =>{
-      element.addEventListener("click",viewEmail)
+      element.addEventListener("click",viewEmail);
     })
   }).catch(error => console.log(error));
 };
