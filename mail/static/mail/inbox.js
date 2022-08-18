@@ -46,9 +46,9 @@ function compose_reply(emailInfo) {
 
 
   // Clear out composition fields
-  document.querySelector('#compose-recipients').value = emailInfo.recipient;
+  document.querySelector('#compose-recipients').value = emailInfo.recipients;
   document.querySelector('#compose-subject').value = `Re: ${emailInfo.subject}`;
-  document.querySelector('#compose-body').value =`On ${emailInfo.timestamp} ${emailInfo.recipient} wrote:`;
+  document.querySelector('#compose-body').value =`On ${emailInfo.timestamp} ${emailInfo.recipient} wrote: ${emailInfo.body}`;
 }
 
 
@@ -104,7 +104,7 @@ function loadEmailInfo(info,currentMailbox){
 
     //reply btn
     document.querySelector(".reply").addEventListener("click",function(){
-      compose_reply(info.sender, info.subject, info.timestamp);
+      compose_reply(info);
       console.log("reply button");
     })
 
