@@ -36,6 +36,7 @@ function compose_email() {
 
 
 
+
 //load email info 
 function loadEmailInfo(info,currentMailbox){
     // Show the email and hide other views
@@ -48,7 +49,7 @@ function loadEmailInfo(info,currentMailbox){
     <div class= 'row justify-content-between' >
 
       <div class= 'col-7 ' >
-        <p>From:${info.sender}</p>
+        <p >From:${info.sender}</p>
         <p>To:${info.recipients.join(",")}<p>
         <p>Subject:${info.subject}</p>
         <p>Timestamp:${info.timestamp}</p>
@@ -60,6 +61,10 @@ function loadEmailInfo(info,currentMailbox){
     </div>
     <hr>
     <p>${info.body}</p>
+
+    <div class= 'reply-btn'>
+      <button class = 'btn btn-light reply '><i class="bi bi-reply-fill">Reply</i></button>
+    </div>
     `
 
 
@@ -78,6 +83,13 @@ function loadEmailInfo(info,currentMailbox){
     const email = currentMailbox === 'sent' ? templateWithoutButton : templateWithButton;
 
     document.querySelector("#email-info").innerHTML = email
+
+    //reply btn
+    document.querySelectorAll(".reply").addEventListener("click",function(){
+
+    })
+
+    //archive btn
     document.querySelector(".archive")?.addEventListener("click",function(){
       console.log("archived");
       fetch(`/emails/${info.id}`, {
@@ -90,6 +102,11 @@ function loadEmailInfo(info,currentMailbox){
       });
     });
 };
+
+
+
+
+
 
 
 
@@ -114,11 +131,11 @@ function load_mailbox(mailbox) {
 
      
       const emailElement =  ` 
-      <div class=" email-ele mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'}  row border border-secondary" id=email data-id = ${obj.id} data-mailbox = ${mailbox} >
+      <a ><div class=" email-ele mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'}  row border border-dark " id=email data-id = ${obj.id} data-mailbox = ${mailbox} >
           <div class="col fw-bold  ">${obj.sender}</div>
-          <div class="col-sm-5   ">${obj.subject}</div>
-          <div class="col fw-lighter fs-6 ">${obj.timestamp}</div>
-      </div>
+          <div class="col-sm-5 ">${obj.subject}</div>
+          <div class="col fw-lighter fst-italic ">${obj.timestamp}</div>
+      </div></a>
   `
       document.querySelector('#emails-view').insertAdjacentHTML("beforeend",emailElement)
     };
@@ -129,6 +146,9 @@ function load_mailbox(mailbox) {
     })
   }).catch(error => console.log(error));
 };
+
+
+
 
 
 
@@ -175,6 +195,7 @@ return false;
 
 
 
+
 //viewEmail
 function viewEmail(){
     const currentMailbox = this.dataset.mailbox
@@ -192,6 +213,8 @@ function viewEmail(){
       loadEmailInfo(emailInfo,currentMailbox);
     });
 };
+
+
 
 
 
