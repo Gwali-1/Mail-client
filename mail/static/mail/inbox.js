@@ -1,3 +1,5 @@
+'use strict'
+
 document.addEventListener('DOMContentLoaded', function() {
 
   // Use buttons to toggle between views
@@ -48,7 +50,7 @@ function compose_reply(emailInfo) {
   // Clear out composition fields
   document.querySelector('#compose-recipients').value = emailInfo.recipients;
   document.querySelector('#compose-subject').value = `Re: ${emailInfo.subject}`;
-  document.querySelector('#compose-body').value =`On ${emailInfo.timestamp} ${emailInfo.recipient} wrote: ${emailInfo.body}`;
+  document.querySelector('#compose-body').value =`On ${emailInfo.timestamp} ${emailInfo.recipients} wrote: ${emailInfo.body}`;
 }
 
 
@@ -61,7 +63,6 @@ function loadEmailInfo(info,currentMailbox){
     document.querySelector('#emails-view').style.display = 'none';
     document.querySelector('#compose-view').style.display = 'none';
     document.querySelector('#email-info').style.display = 'block';
-    console.log(this)
     
     const templateWithButton =  `  
     <div class= 'row justify-content-between' >
@@ -103,7 +104,7 @@ function loadEmailInfo(info,currentMailbox){
     document.querySelector("#email-info").innerHTML = email
 
     //reply btn
-    document.querySelector(".reply").addEventListener("click",function(){
+    document.querySelector(".reply")?.addEventListener("click",function(){
       compose_reply(info);
       console.log("reply button");
     })
@@ -150,11 +151,11 @@ function load_mailbox(mailbox) {
 
      
       const emailElement =  ` 
-      <a ><div class=" email-ele mb-2 ${obj.read ? 'bg-white' : 'bg-secondary'}  row border border-dark " id=email data-id = ${obj.id} data-mailbox = ${mailbox} >
+      <div class=" email-ele mb-2 ${obj.read ? 'read' : 'bg-white'}  row border border-dark " id=email data-id = ${obj.id} data-mailbox = ${mailbox} >
           <div class="col fw-bold  ">${obj.sender}</div>
           <div class="col-sm-5 ">${obj.subject}</div>
           <div class="col fw-lighter fst-italic ">${obj.timestamp}</div>
-      </div></a>
+      </div>
   `
       document.querySelector('#emails-view').insertAdjacentHTML("beforeend",emailElement)
     };

@@ -2,13 +2,28 @@
 {% load static %}
 
 {% block body %}
-    <h2>{{ request.user.email }}</h2>
 
-    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
-    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
-    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
-    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
-    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <div class="row p-3  r bg-dark">
+        <div class=" nav col-7">
+            <button class="btn btn-sm btn-outline-info me-2" id="inbox">Inbox</button>
+            <button class="btn btn-sm btn-outline-primary me-2" id="compose">Compose</button>
+            <button class="btn btn-sm btn-outline-success me-2" id="sent">Sent</button>
+            <button class="btn btn-sm btn-outline-warning me-2" id="archived">Archived</button>
+            <a class="btn btn-sm btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
+        </div>
+
+
+        <!-- <div class="col border text-center text-light">
+            <i class="bi bi-person-fill">{{ request.user.email }}</i>
+        </div> -->
+        <span  class="col  text-center text-light">
+            <i class="bi bi-person-fill">{{ request.user.email }}</i>
+        </span>
+       
+    
+    </div>
+   
+   
     <hr>
 
     <div id="emails-view">

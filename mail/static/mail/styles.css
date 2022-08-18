@@ -5,6 +5,7 @@ textarea {
 
 .email-ele:hover{
     color: rgb(47, 0, 255);
+    padding: 2px;
 }
 
 a{  
@@ -15,4 +16,8 @@ a{
 .reply-btn{
     margin-top: 100px;
     /* border: 2px solid green; */
+}
+
+.read {
+    background-color: rgb(219, 219, 219);
 }
