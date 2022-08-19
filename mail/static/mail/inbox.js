@@ -146,9 +146,6 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`).then(response => response.json()).then(emails => {
     //add elements to page
     for(const obj of emails){
-      console.log(obj);
-
-     
       const emailElement =  ` 
       <div class=" email-ele mb-2 ${obj.read ? 'read' : 'bg-white'}  row border border-dark " id=email data-id = ${obj.id} data-mailbox = ${mailbox} >
           <div class="col fw-bold  ">${obj.sender}</div>
@@ -192,11 +189,9 @@ function sendEmail() {
   }).then(response => response.json()).then(responseMessage => {
     //respose after email is sent
     if(responseMessage.error){
-      console.log("not sent");
       showError(responseMessage.error);
     }else{
       //if sent sunccesfully
-      console.log("sent");
       load_mailbox("sent");
     }})
     .catch(error => console.log(error));
@@ -229,7 +224,6 @@ function viewEmail(){
     fetch(`/emails/${this.dataset.id}`)
     .then(response => response.json())
     .then(emailInfo => {
-      console.log(emailInfo);
       loadEmailInfo(emailInfo,currentMailbox);
     });
 };
