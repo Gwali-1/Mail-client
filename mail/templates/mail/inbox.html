@@ -26,13 +26,13 @@
     </div>
   
 
-    <div id="email-info" class="border container pb-2" >
+    <div id="email-info" class="border container pb-2 bg-light" >
     </div>
 
     <div id="compose-view"  class="bg-dark">
         <div id="message" class="text-danger">
         </div>
-        <h3 class="bg-dark text-primary">New Email</h3>
+        <h3 class="bg-dark text-primary pt-2">New Email</h3>
         <form id="compose-form" >
             <div class="p-3 bg-dark">
                 <div class="input-group ">
@@ -49,23 +49,11 @@
                     <input id="compose-subject" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
             </div>
-           
 
-            <!-- <div class="form-group">
-                From: <input disabled class="form-control" value="{{ request.user.email }} ">
-            </div>
-            <div class="form-group">
-                To: <input id="compose-recipients" class="form-control">
-            </div>
-            <div class="form-group">
-                <input class="form-control" id="compose-subject" placeholder="Subject">
-            </div> -->
-
-            <div class=" bg-light pb-2">
-                <textarea class="form-control" id="compose-body" placeholder="Body"  rows="11" cols="50"></textarea>
+            <div class=" read pb-2">
+                <textarea class="form-control read" id="compose-body" placeholder="Body"  rows="11" cols="50"></textarea>
                 <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill">Send</i></button>
-                <!-- <input type="submit" class="btn btn-primary"/>
-            </div> -->
+            </div> 
           
         </form>
     </div>

@@ -48,7 +48,7 @@ function compose_reply(emailInfo) {
 
 
   // Clear out composition fields
-  document.querySelector('#compose-recipients').value = emailInfo.recipients;
+  document.querySelector('#compose-recipients').value = emailInfo.sender;
   document.querySelector('#compose-subject').value = `Re: ${emailInfo.subject}`;
   document.querySelector('#compose-body').value =`On ${emailInfo.timestamp} ${emailInfo.recipients} wrote: ${emailInfo.body}`;
 }
@@ -78,8 +78,7 @@ function loadEmailInfo(info,currentMailbox){
       ${info.archived? 'Unarchive' : 'Archive'}</i></button>
       </div> 
     </div>
-    <hr>
-    <p>${info.body}</p>
+    <blockquote class='pt-2'>${info.body}</blockquote>
 
     <div class= 'reply-btn'>
       <button class = 'btn btn-primary reply '><i class="bi bi-reply-fill">Reply</i></button>
