@@ -29,22 +29,44 @@
     <div id="email-info" class="border container pb-2" >
     </div>
 
-    <div id="compose-view">
-        <div id="message">
+    <div id="compose-view"  class="bg-dark">
+        <div id="message" class="text-danger">
         </div>
-        <h3>New Email</h3>
-        <form id="compose-form">
-            <div class="form-group">
-                From: <input disabled class="form-control" value="{{ request.user.email }}">
+        <h3 class="bg-dark text-primary">New Email</h3>
+        <form id="compose-form" >
+            <div class="p-3 bg-dark">
+                <div class="input-group ">
+                    <span class="input-group-text" id="inputGroup-sizing-default ">From:</span>
+                    <input disabled value="{{ request.user.email }}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group ">
+                    <span class="input-group-text" id="inputGroup-sizing-default">To:</span>
+                    <input id="compose-recipients" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+    
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Subject:</span>
+                    <input id="compose-subject" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+           
+
+            <!-- <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }} ">
             </div>
             <div class="form-group">
                 To: <input id="compose-recipients" class="form-control">
             </div>
             <div class="form-group">
                 <input class="form-control" id="compose-subject" placeholder="Subject">
-            </div>
-            <textarea class="form-control" id="compose-body" placeholder="Body"  rows="11" cols="50"></textarea>
-            <input type="submit" class="btn btn-primary"/>
+            </div> -->
+
+            <div class=" bg-light pb-2">
+                <textarea class="form-control" id="compose-body" placeholder="Body"  rows="11" cols="50"></textarea>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill">Send</i></button>
+                <!-- <input type="submit" class="btn btn-primary"/>
+            </div> -->
+          
         </form>
     </div>
 {% endblock %}
