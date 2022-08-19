@@ -65,16 +65,16 @@ function loadEmailInfo(info,currentMailbox){
     document.querySelector('#email-info').style.display = 'block';
     
     const templateWithButton =  `  
-    <div class= 'row justify-content-between' >
+    <div class= 'row justify-content-between bg-dark text-light py-2' >
 
       <div class= 'col-7 ' >
-        <p >From:${info.sender}</p>
-        <p>To:${info.recipients.join(",")}<p>
-        <p>Subject:${info.subject}</p>
-        <p>Timestamp:${info.timestamp}</p>
+        <p >From:  ${info.sender}</p>
+        <p>To:  ${info.recipients.join(",")}<p>
+        <p>Subject:  ${info.subject}</p>
+        <p>Timestamp:  ${info.timestamp}</p>
       </div>
       <div class = col-3>
-      <button class = 'btn btn-light archive ' ><i class='bi bi-archive-fill ${info.archived? 'text-success' : 'text-dark'}'>
+      <button class = 'btn btn-warning archive ' ><i class='bi bi-archive-fill text-dark'>
       ${info.archived? 'Unarchive' : 'Archive'}</i></button>
       </div> 
     </div>
@@ -82,17 +82,17 @@ function loadEmailInfo(info,currentMailbox){
     <p>${info.body}</p>
 
     <div class= 'reply-btn'>
-      <button class = 'btn btn-light reply '><i class="bi bi-reply-fill">Reply</i></button>
+      <button class = 'btn btn-primary reply '><i class="bi bi-reply-fill">Reply</i></button>
     </div>
     `
 
 
-    const templateWithoutButton =  `  <div >
-      <div class= '' >
-          <p>From:${info.sender}</p>
-          <p>To:${info.recipients.join(",")}<p>
-          <p>Subject:${info.subject}</p>
-          <p>Timestamp:${info.timestamp}</p>
+    const templateWithoutButton =  ` <div class= 'row'>
+      <div class= 'bg-dark text-light py-2' >
+          <p>From:  ${info.sender}</p>
+          <p>To:  ${info.recipients.join(",")}<p>
+          <p>Subject:  ${info.subject}</p>
+          <p>Timestamp:  ${info.timestamp}</p>
       </div>
       <hr>
       <p>${info.body}</p>
@@ -141,7 +141,7 @@ function load_mailbox(mailbox) {
 
 
   // Show the mailbox name
-  document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+  document.querySelector('#emails-view').innerHTML = `<h3 class="text-info">${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
   //api call
   fetch(`/emails/${mailbox}`).then(response => response.json()).then(emails => {
