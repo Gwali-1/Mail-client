@@ -110,7 +110,6 @@ function loadEmailInfo(info,currentMailbox){
 
     //archive btn
     document.querySelector(".archive")?.addEventListener("click",function(){
-      console.log("archived");
       fetch(`/emails/${info.id}`, {
         method: 'PUT',
         body: JSON.stringify({
