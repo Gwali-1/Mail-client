@@ -152,7 +152,7 @@ def logout_view(request):
     return HttpResponseRedirect(reverse("index"))
 
 
-def register(request):
+def register(request):   #TODO check of info is actually submitted 
     if request.method == "POST":
         email = request.POST["email"]
 
