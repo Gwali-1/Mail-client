@@ -48,18 +48,14 @@ run the serber  `python manage.py runserver`
 
 # Look
 
-## Login
-
-![login page](/page_views/login.png)
-
-
-## Signup
-
-![register page](/page_views/register.png)
 
 ## inbox
 
 ![inbox page](/page_views/inbox.png)
+
+
+# sent 
+![sent page](/page_views/sent.png)
 
 
 ## compose
@@ -71,6 +67,12 @@ run the serber  `python manage.py runserver`
 ![email page](/page_views/email_view.png)
 
 
-# sent 
-![sent page](/page_views/sent.png)
+## Login
+
+![login page](/page_views/login.png)
+
+
+## Signup
+
+![register page](/page_views/register.png)
 
