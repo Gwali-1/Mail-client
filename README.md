@@ -1,5 +1,5 @@
 
-#MAILBOX
+# MAILBOX
 
 This is a django web application that mimicks a real email sending application. It gives users with accounts features that allow them to send and recieve emails to users who also have accounts on the app. Emails recieved by a user can be archived and replied to. This is not an actual email delivering application hence it employs databases in its operations.the mails are stored in databases and retrievd for a particular user who has it in his/her mailbox.
 The entire application view is a single html template which is manipulated into different views with javascript. Event listeners are attached to buttons which then make the appropriate api calls to the server to retrieve data eg. fetch a users inbox 
