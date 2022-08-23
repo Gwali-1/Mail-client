@@ -38,7 +38,7 @@ install requirements.txt  `pip install -r requirements.txt`
 
 make migrations `python manage.py makemigrations mail`
 
-run the serber  `python manage.py runserver`
+run the server  `python manage.py runserver`
 
 
 
