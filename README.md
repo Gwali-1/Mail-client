@@ -72,3 +72,10 @@ run the server  `python manage.py runserver`
 
 ![register page](/page_views/register.png)
 
+
+# Implemented with 
+* html
+* vanilla css 
+* bootstrap
+* javascript
+* python
