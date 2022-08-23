@@ -50,7 +50,7 @@ function compose_reply(emailInfo) {
   // Clear out composition fields
   document.querySelector('#compose-recipients').value = emailInfo.sender;
   document.querySelector('#compose-subject').value = `Re: ${emailInfo.subject}`;
-  document.querySelector('#compose-body').value =`On ${emailInfo.timestamp} ${emailInfo.recipients} wrote: ${emailInfo.body}`;
+  document.querySelector('#compose-body').value =`On ${emailInfo.timestamp} ${emailInfo.sender} wrote:  ${emailInfo.body}`;
 }
 
 
