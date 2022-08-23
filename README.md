@@ -40,3 +40,37 @@ After cloning the repo
 set up a virtual environment
 install requirements.txt  `pip install -r requirements.txt`
 
+make migrations `python manage.py makemigrations mail`
+
+run the serber  `python manage.py runserver`
+
+
+
+# Look
+
+## Login
+
+![login page](/page_views/login.png)
+
+
+## Signup
+
+![register page](/page_views/register.png)
+
+## inbox
+
+![inbox page](/page_views/inbox.png)
+
+
+## compose
+
+![compose page](/page_views/compose.png)
+
+## Email
+
+![email page](/page_views/email_view.png)
+
+
+# sent 
+![sent page](/page_views/sent.png)
+
